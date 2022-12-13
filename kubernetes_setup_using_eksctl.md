@@ -30,11 +30,18 @@ You can follow same procedure in the official  AWS document [Getting started wit
 3. Create an IAM Role and attache it to EC2 instance    
    `Note: create IAM user with programmatic access if your bootstrap system is outside of AWS`   
    IAM user should have access to   
-   IAM   
-   EC2   
-   VPC    
-   CloudFormation
+   a) IAM -> Role -> Create Role -> click on (AWS service Allow AWS services like EC2, Lambda, or others to perform actions in this account.) -> Click on ( EC2) ->     Next.
+   b) Give the Permision policy .
+     1) IAMFullAccess
+     2) AWSCloudFormationFullAccess
+     3) AmazonVPCFullAccess
+     4) AmazonEC2FullAccess
+     5) AdministratorAccess
 
+   c) Next -> Next -> Give the Role Name (   ......... ) -> Create Role 
+   Note :- Here , Node Create Successfully.
+   d) Go to the Our Ec2 Instance -> Click on the Ec2-instance -> Action -> Security -> Modify IAM ROLE -> Here we need to choose the Give Create Role Name -> Update     IAM Role.
+   
 4. Create your cluster and nodes 
    ```sh
    eksctl create cluster --name cluster-name  \
@@ -47,7 +54,7 @@ You can follow same procedure in the official  AWS document [Getting started wit
    example:
    eksctl create cluster --name valaxy-cluster \
       --region ap-south-1 \
-   --node-type t2.small \
+   --node-type t2.small 
     ```
 
 5. To delete the EKS clsuter 
