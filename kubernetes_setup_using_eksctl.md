@@ -1,3 +1,5 @@
+**IMP1 : In this EKS We can not see the information about the EKS master / Master node because AWS is manage the master node **
+**IMP2 : /root/.kube/config   :-> This the configration file of the EKS in this file you can able to see the all inforamtion about the master and slave node**
 # Setup Kubernetes on Amazon EKS
 
 You can follow same procedure in the official  AWS document [Getting started with Amazon EKS – eksctl](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html)   
@@ -56,6 +58,10 @@ You can follow same procedure in the official  AWS document [Getting started wit
       --region ap-south-1 \
    --node-type t2.small 
     ```
+    A) To Check The weither this cluster are created or not .
+     In Search Box ( CloudFormation ) and click on this Service .
+     Here , you can see the stuck  name , status , creation time and description .
+     
 
 5. To delete the EKS clsuter 
    ```sh 
