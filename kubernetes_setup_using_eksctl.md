@@ -1,6 +1,7 @@
 **IMP1 : In this EKS We can not see the information about the EKS master / Master node because AWS is manage the master node **
 **IMP2 : /root/.kube/config   :-> This the configration file of the EKS in this file you can able to see the all inforamtion about the master and slave node**
 # Setup Kubernetes on Amazon EKS
+**Note : The connection to the server localhost:8080 was refused - did you specify the right host or port?   To Reslove this issue we need to cp the /.kube/config under the ec2-user and also change the permision of the of this file  **
 
 You can follow same procedure in the official  AWS document [Getting started with Amazon EKS – eksctl](https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html)   
 
