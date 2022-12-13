@@ -7,7 +7,7 @@ You can follow same procedure in the official  AWS document [Getting started wit
 
 #### AWS EKS Setup 
 1. Setup kubectl   
-   a. Download kubectl version 1.20  
+   a. Download kubectl version 1.20   ( https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html )
    b. Grant execution permissions to kubectl executable   
    c. Move kubectl onto /usr/local/bin   
    d. Test that your kubectl installation was successful    
