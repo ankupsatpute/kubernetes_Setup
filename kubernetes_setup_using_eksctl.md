@@ -61,7 +61,8 @@ You can follow same procedure in the official  AWS document [Getting started wit
     A) To Check The weither this cluster are created or not .
      In Search Box ( CloudFormation ) and click on this Service .
      Here , you can see the stuck  name , status , creation time and description .
-     
+     B) kubectl get pod -> Check the pod inforamtion
+     C) eksctl get cluster --region ap-south-1
 
 5. To delete the EKS clsuter 
    ```sh 
