@@ -76,3 +76,16 @@ You can follow same procedure in the official  AWS document [Getting started wit
    kubectl run pod tomcat --image=tomcat 
    ```
 
+_---------------------------------------------------------------------------------------------------------------------
+Setup on Jenkins Server:-
+1) Chnage the Ownership of the Kubectl , helm and aws command line interface from root to jenkins
+2) Also chnage the ownership all eks and kubectl under /user/local/bin from root jenkins
+Note :- Whenever you can create the new cluster means after delete the practice lab and create new cluster at thet time you should need to update the .kube/config fil.
+Syntax:- 
+ aws eks update-kubeconfig --name <cluster-name> --region <region_name>
+  Example:-
+  aws eks update-kubeconfig --name ankush-cluster --region ap-south-1
+  
+  Setup on to the jenkins Dashborad:-
+  1) Install the Kubernets CLI plugins .
+  Note: Other Remaining Step add into the credentail file please flow this file.
