@@ -1,0 +1,50 @@
+
+1st We need to Create One IAM Role and give the AmazonEC2FullAccess and attache this Role to the Ununtu Machine or Instance .
+
+Terraform Automation using Jenkins | Automate AWS EC2 Instance setup using Terraform and Jenkins | Create EC2 Instance Using terraform code with Jenkins.
+steps 1)
+1st we need to switch ubuntu home directory using below command.
+cd /home/ubuntu
+
+steps 2)
+Install Jenkins and Java On Ubuntu machine
+Below step for to install java on Ubuntu
+$ sudo apt-get install openjdk-11-jdk
+
+Below command to install the Jenkins packages on ubungtu server.
+
+https://pkg.jenkins.io/debian-stable/
+
+Steps 3)
+Update the Ubuntu Server and Start the jenkins service and also create the symbolic link for to enable the jenkins server , using below command.
+1)apt update -y
+2) systemctl status jenkins
+3) systemctl enable jenkins
+
+
+Steps 4) Install Terraform on ubuntu server
+
+A) Add the Register HAshiCorp GPG key 
+
+curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+
+B) Add HashiCorp package repository
+
+sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+
+steps 5)
+Update the Ubuntu Pacakge
+
+A)sudo apt update
+
+steps 6) Install Terraform on Ubuntu
+A) sudo apt install terraform
+
+steps 7) Check Terraform version
+
+terraform -v
+
+
+
+https://youtu.be/-11dEvZNkRk
+
