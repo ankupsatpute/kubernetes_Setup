@@ -1,0 +1,55 @@
+1)First, remove the default version supplied by the official Ubuntu repos, run commands:
+
+sudo apt remove ansible
+
+sudo apt --purge autoremove
+
+2)Update Ubuntu repo and apply all pending patches:
+
+sudo apt update
+
+sudo apt upgrade
+
+
+3)Install software-properties-common package on Ubuntu to enable PPA support, run:
+
+sudo apt -y install software-properties-common
+
+sudo apt-add-repository ppa:ansible/ansible
+
+4)Finally, install the latest version of Ansible on Ubuntu Linux using the apt:
+
+sudo apt install ansible
+
+5)It allow you to upload Ubuntu source packages to be built and published as an apt repository by Launchpad. Type the following apt-get command or apt command:
+
+sudo apt update
+
+sudo apt upgrade
+
+sudo apt install software-properties-common
+
+
+6)Next add ppa:ansible/ansible to your system’s Software Source:
+
+sudo apt-add-repository ppa:ansible/ansible
+
+7)Next, update your repos:
+
+sudo apt update
+
+8)It is time to install the latest version of Ansible, enter:
+
+sudo apt install ansible
+
+9) Setting up Ansible bash completion support Type the following two commands:
+
+sudo apt install python3-argcomplete
+
+sudo activate-global-python-argcomplete3
+
+10) Type the following command:
+
+ansible --version
+
+https://www.cyberciti.biz/faq/how-to-install-and-configure-latest-version-of-ansible-on-ubuntu-linux/
