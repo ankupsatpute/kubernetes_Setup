@@ -1,0 +1,56 @@
+Ansible Dynamic Inventory File :- 
+
+1) 1st We need to install Ansible on ec2- install
+
+sudo yum amzaon-linux-extraxt install ansible2
+
+2) Install Amazon.aws package from the ansible galaxy.
+
+ansible-galaxy collection install amazon.aws
+
+3) Install Pip on home location  ( /home/ec2-user)
+
+wget https://bootstrap.pypa.io/get-pip.py
+
+4) then exicute the this script using below command .
+
+python get-pip.py
+
+Note :- If you faced below error 
+ERROR: This script does not work on Python 2.7 The minimum supported Python version is 3.7. Please use https://bootstrap.pypa.io/pip/2.7/get-pip.py instead.
+
+Note :- Below downloading this suggest version pythong pip , 1st we need to delete the older downloaded version.
+
+sudo rm -rf get-pip.py
+
+5) After install pip sucessfully then install the boto3
+
+pip install boto3
+
+
+https://docs.ansible.com/ansible/latest/collections/amazon/aws/aws_ec2_inventory.html#examples
+
+https://pip.pypa.io/en/stable/installation/
+
+========================================================================
+
+
+plugin: aws_ec2
+regions:
+   - ap-south-1
+ 
+ =================================================
+ 
+ if you want to specific ip adrr
+ 
+plugin: aws_ec2
+regions:
+   - ap-south-1
+filters:
+  # All instances with their `Environment` tag set to `dev`
+  tag:Environment: dev
+  # All dev and QA hosts
+  tag:Environment:
+    - dev
+    - qa
+   
