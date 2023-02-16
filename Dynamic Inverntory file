@@ -53,4 +53,7 @@ filters:
   tag:Environment:
     - dev
     - qa
-   
+  ------------------------------------------------------------------------------
+  What is the comand to run or list the running instnace ?
+  Ans:- 
+  ansible-inventory -i <full path of inventory file> 
