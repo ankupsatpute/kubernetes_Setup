@@ -6,9 +6,9 @@ sudo yum amzaon-linux-extraxt install ansible2
 
 2) Install Amazon.aws package from the ansible galaxy.
 
-ansible-galaxy collection install amazon.aws
+ansible-galaxy collection install amazon.aws 
 
-3) Install Pip on home location  ( /home/ec2-user)
+3) Install Pip on home location  ( /home/ec2-user)  Its requires the setuptools package
 
 wget https://bootstrap.pypa.io/get-pip.py
 
@@ -23,9 +23,9 @@ Note :- Below downloading this suggest version pythong pip , 1st we need to dele
 
 sudo rm -rf get-pip.py
 
-5) After install pip sucessfully then install the boto3
+5) After install pip sucessfully then install the boto3 , Its Need to exicute the module
 
-pip install boto3
+pip install boto3 
 
 
 https://docs.ansible.com/ansible/latest/collections/amazon/aws/aws_ec2_inventory.html#examples
