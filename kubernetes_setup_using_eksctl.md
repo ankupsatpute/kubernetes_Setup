@@ -89,3 +89,9 @@ Syntax:-
   Setup on to the jenkins Dashborad:-
   1) Install the Kubernets CLI plugins .
   Note: Other Remaining Step add into the credentail file please flow this file.
+  
+  
+  Update Config File.
+  
+  aws eks update-kubeconfig --name ankush --region ap-south-1
+
