@@ -1,0 +1,152 @@
+Jenkinsfile:
+
+This pipeline works through the following steps:
+
+1)Checks out the application
+2)Checks the last build version and writes the new one.
+3)If the docker image still exists it cleans it up and builds the new one.
+4)It then runs the new build.
+5)Runs a python test on it, it is a simple test that opens the browser, screenshots it and post to imgur.com, checks for the xpath and then moves on.
+6)Once the test passes it pushes the new build to docker hub.
+7)At this point it calls the Kubernetes Pipeline, that pipeline applies the changes, updates the changes and pushes them to github.
+
+pipeline 
+    agent {
+        label 'ilab-dev'
+    }
+    stages {
+        stage('Get Workspace Directory') {
+            steps {
+                echo "Workspace is in ${WORKSPACE}"
+            }
+        }
+        stage('Git Checkout Blue Green App'){
+            steps{
+                git branch: 'main', url:             
+                'https://github.com/01010101Basics/blue-green.git'
+            }
+        }
+          stage('Ensure version.txt is writeable'){
+            steps{
+                sh 'sudo chmod 777 version.txt'
+            }
+        }
+        stage('Create Build Number'){
+            steps{ 
+                script{
+                       def readcounter =    readFile(file: 'version.txt')
+                       readcounter = readcounter.toInteger() +1
+                       env.VERSION= readcounter
+                       echo env.VERSION
+                       writeFile(file: 'version.txt',          
+                       text:readcounter.toString())
+                       writeFile(file: '$HOME/blue-green/version.txt', 
+                       text:readcounter.toString())
+                }
+            }
+        }       
+        stage('If Docker Image Exist Remove It') {
+            steps {
+                sh 'sudo docker rm -f wsite'
+            }
+        }
+         stage('Docker Build Image') {
+            steps {
+                sh 'sudo docker build . -t test'
+            }
+        }
+        stage('Docker Run') {
+            steps {
+                sh 'sudo docker run --name wsite -it -p 82:80 -d test'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh '''#!/bin/bash
+                sudo chmod +x runpytest.sh
+                ./runpytest.sh
+                '''
+            }
+        }
+        stage('Test Was Successful Building New Image'){
+            steps{
+                sh "docker build . -t kmgoddard/bgapp:1.${env.VERSION}"
+            }
+        }
+        stage('Push tne New Version'){
+            steps{
+                sh "docker push kmgoddard/bgapp:1.${env.VERSION}"
+            }
+        }
+       /* stage('Scan the image for vulnerabilities'){
+            steps{
+                sh "docker scan kmgoddard/bgapp:1.${env.VERSION}"
+            }
+        }*/
+        stage('It is good lets push it to the repository'){
+            steps{
+                sh "docker push kmgoddard/bgapp:1.${env.VERSION}"
+            }
+        }
+        stage('Cleanup the Xvfb '){
+            steps{
+                sh 'killall Xvfb'
+            }
+        }
+        stage('Push Blue-Green to Git'){
+            steps{
+                sshagent(['github-01010101basics']) {
+                sh '''
+                sudo chmod +x pushrep.sh
+                ./pushrep.sh
+                '''}
+            }
+        }
+        stage('Build ilab-ci-cd-kube-bg-deploy') {
+            steps{
+        
+                build job: 'ilab-ci-cd-kube-bg-deploy', parameters: [
+                string(name: 'version', value: "${env.VERSION}")]
+            } 
+        } 
+    }
+}
+
+
+Kubernetes Deployment Pipeline:
+
+1)Pulls the repository.
+2)Deploys change changes to the pods.
+3)Push changes to the repository.
+
+pipeline 
+    agent {
+        label "ilab-control"
+    }
+    stages {
+        stage('git main branch') {
+            steps {
+                git branch: 'main', url: 'https://github.com/01010101Basics/k8s-bg-deployment.git'
+            }
+        }
+        stage('Build'){
+            steps{
+                sh "./updateimgdeployed.sh \"        image: kmgoddard/bgapp:1.${version}\""
+            }
+        }
+        stage('Build k8s BG Application'){
+            steps{
+            sh '''
+            ./runkube.sh
+            '''
+            }
+        }
+    }
+}
+
+https://www.linkedin.com/pulse/blue-green-deployments-cicd-pipelines-jenkins-git-ken-goddard
+
+
+
+
+
