@@ -1,3 +1,5 @@
  Terraform provisioners - https://jhooq.com/terraform-provisioner/
  
  SSH into terrafrom AWS EC2 instance -  https://jhooq.com/terraform-ssh-into-aws-ec2/
+
+How to use Terraform input variables - https://jhooq.com/terraform-input-variables/
